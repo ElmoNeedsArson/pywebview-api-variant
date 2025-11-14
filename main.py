@@ -9,7 +9,6 @@ import cv2
 import threading
 import mediapipe as mp
 from gradio_client import Client
-import pytesseract
 import easyocr
 from dotenv import load_dotenv
 import time
@@ -17,13 +16,14 @@ import math
 import numpy as np
 from queue import Queue
 import google.generativeai as genai
+import requests
 print("imported packages")
 
 load_dotenv()
 
 # Access the Hugging Face token and the pyTesseract path
 huggingface_token = os.getenv('HUGGINGFACE_TOKEN')
-pyTesseract_path = os.getenv('PYTESSERACT_PATH')
+# pyTesseract_path = os.getenv('PYTESSERACT_PATH')
 
 # Establishing the google api
 google_key = os.getenv('GENAI_KEY')
@@ -31,7 +31,7 @@ genai.configure(api_key=google_key)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 # Initialize the pyTesseract module
-pytesseract.pytesseract.tesseract_cmd = pyTesseract_path
+# pytesseract.pytesseract.tesseract_cmd = pyTesseract_path
 
 # Initialize EasyOCR Reader
 reader = easyocr.Reader(['en'], gpu=False)
